@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input type="text" #guessInput class="form-control " placeholder="Enter your guess"
+        aria-label="Recipient's username" aria-describedby="button-addon2">
+      <button class="btn btn-outline-primary" type="button" id="button-addon2"
+        (click)="enterGuess(guessInput.value)">Check!</button>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div *ngFor="let guessedWord of guessedWords">
+      <div class="btn-group">
+        <div *ngFor="let char of guessedWord | split guessedWord">
+          <button type="button" [ngClass]="compareWords(char)">{{char}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10" style="margin-left: 30px;margin-top: 20px;">
+      <div class="btn-group">
+        <div *ngFor="let letter of letters1">
+          <button type="button" [ngClass]="[enteredChars.includes(letter)?'btn btn-secondary char':'btn btn-light char',checkChar(letter)?'btn btn-success char':'btn btn-secondary char']">{{letter}}</button>
+        </div>
+      </div>
+      <div class="btn-group" style="margin-left: 30px;">
+        <div *ngFor="let letter of letters2">
+          <button type="button" [ngClass]="[enteredChars.includes(letter)?'btn btn-secondary char':'btn btn-light char',checkChar(letter)?'btn btn-success char':'btn btn-secondary char']">{{letter}}</button>
+        </div>
+      </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
