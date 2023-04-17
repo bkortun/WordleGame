@@ -9,33 +9,19 @@ export class GameComponent implements OnInit {
 
   constructor() { }
 
-
-  //todo burayı düzelt
   guessedWords: string[] = ["     ", "     ", "     ", "     ", "     ", "     "]
-  //!
   counter = 0;
   enteredChars: string[] = [];
   correctChars: string[] = [];
 
   letters1 = ["A", "B", "C", "D", "E", "F", "G", "Ğ", "H", "I", "İ", "J", "K", "L"]
   letters2 = ["M", "N", "O", "Ö", "P", "R", "S", "Ş", "T", "U", "Ü", "V", "Y", "Z"]
-  wordPool = ["duvar", "beyaz", "civar", "dolap", "şeker", "fener", "yasal", "halat", "araba", "joker", "kablo", "korku", "merak", "narin", "kilim", "pilot", "radyo", "sahil", "tavan", "lamba", "yayla", "yemek", "zaman",
-    "RADYO",
-    "SEHPA",
-    "DOLAP",
-    "KALEM",
-    "KAVUN",
-    "KÖPEK",
-    "MERAK",
-    "GAZAP",
-    "SEHPA",
-    "ROMAN",
-    "CEVİZ"];
+  wordPool = ["duvar", "beyaz", "civar", "dolap", "şeker", "fener", "yasal", "halat", "araba", "joker", "kablo", "korku", "merak", "narin", "kilim", "pilot", "radyo", "sahil", "tavan", "lamba", "yayla", "yemek","zaman","RADYO","SEHPA","DOLAP","KALEM","KAVUN","KÖPEK","MERAK","GAZAP","SEHPA","ROMAN","CEVİZ"];
 
 
   chosenWord = "";
-  isEnd=false;
-  isWon=false;
+  isEnd = false;
+  isWon = false;
 
   ngOnInit(): void {
     this.chosenWord = this.chooseWord().toLocaleUpperCase('tr-TR');
@@ -54,14 +40,13 @@ export class GameComponent implements OnInit {
       this.counter++;
 
       value.split('').forEach(el => this.enteredChars.push(el))
-      if(value==this.chosenWord || this.counter==6){
-        this.isEnd=true
-        if(value==this.chosenWord){
-          this.isWon=true;
+      if (value == this.chosenWord || this.counter == 6) {
+        this.isEnd = true
+        if (value == this.chosenWord) {
+          this.isWon = true;
         }
       }
     }
-
   }
 
   checkChar(char: any): boolean {
@@ -76,21 +61,18 @@ export class GameComponent implements OnInit {
     return false;
   }
 
-  compareWords(char: any, wordIndex: number,boxIndex:number): string {
+  compareWords(char: any, wordIndex: number, boxIndex: number): string {
     if (char == " ")
       return 'btn btn-light char'
 
-    return this.compareWordsHandler(this.chosenWord, this.guessedWords[wordIndex], char,boxIndex);
+    return this.compareWordsHandler(this.chosenWord, this.guessedWords[wordIndex], char, boxIndex);
   }
 
-  compareWordsHandler(guestedWord: string, enteredWord: string, char: any,boxIndex:number): string {
-    console.log(guestedWord)
-    console.log(enteredWord)
-    console.log(char)
+  compareWordsHandler(guestedWord: string, enteredWord: string, char: any, boxIndex: number): string {
     for (let i = 0; i < guestedWord.length; i++) {
       for (let j = 0; j < enteredWord.length; j++) {
         if (guestedWord[i] == enteredWord[j] && guestedWord[i] == char) {
-          if (i == boxIndex){
+          if (i == boxIndex) {
             return 'btn btn-success char';
           }
           else
