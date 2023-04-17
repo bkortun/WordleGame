@@ -14,17 +14,28 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-    <div *ngFor="let guessedWord of guessedWords">
+    <div *ngFor="let guessedWord of guessedWords;index as i">
       <div class="btn-group">
-        <div *ngFor="let char of guessedWord | split guessedWord">
-          <button type="button" [ngClass]="compareWords(char)">{{char}}</button>
+        <div *ngFor="let char of guessedWord | split :guessedWord; index as j">
+          <button type="button" [ngClass]="compareWords(char,i,j)">{{char}}</button>
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-4"></div>
 </div>
-
+<div *ngIf="isEnd" class="row">
+  <div class="col-md-3"></div>
+  <div  class="col-md-6 p-10">
+    <div *ngIf="isWon" class="alert alert-success" role="alert">
+      Oyunu kazandın tebrikler!
+    </div>
+    <div *ngIf="!isWon" class="alert alert-danger" role="alert">
+      Oyunu kaybettin!
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-10" style="margin-left: 30px;margin-top: 20px;">

@@ -7,6 +7,8 @@ const routes: Routes = [{
   path:"",component:LayoutComponent, children:[
     {path:"",component:HomeComponent},
     {path:"game",loadChildren:()=>import("./pages/game/game.module").then(module=>module.GameModule)},
+    {path:"card",loadChildren:()=>import("./pages/card/card.module").then(module=>module.CardModule)},
+    {path:"accordion",loadChildren:()=>import("./pages/accordion/accordion.module").then(module=>module.AccordionModule)},
   ]
 }];
 

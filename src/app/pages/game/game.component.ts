@@ -34,7 +34,8 @@ export class GameComponent implements OnInit {
 
 
   chosenWord = "";
-
+  isEnd=false;
+  isWon=false;
 
   ngOnInit(): void {
     this.chosenWord = this.chooseWord().toLocaleUpperCase('tr-TR');
@@ -53,7 +54,12 @@ export class GameComponent implements OnInit {
       this.counter++;
 
       value.split('').forEach(el => this.enteredChars.push(el))
-      //console.log(this.enteredChars)
+      if(value==this.chosenWord || this.counter==6){
+        this.isEnd=true
+        if(value==this.chosenWord){
+          this.isWon=true;
+        }
+      }
     }
 
   }
@@ -70,28 +76,30 @@ export class GameComponent implements OnInit {
     return false;
   }
 
-  compareWords(char: any): string {
+  compareWords(char: any, wordIndex: number,boxIndex:number): string {
     if (char == " ")
       return 'btn btn-light char'
 
-    //şuan son kelime için doğru çalışıyor ama öncekileri işlemiyor onlarıda işlemesi lazım
-     return this.compareWordsHandler(this.chosenWord,this.guessedWords[this.counter-1],char);
-
+    return this.compareWordsHandler(this.chosenWord, this.guessedWords[wordIndex], char,boxIndex);
   }
 
-  compareWordsHandler(guestedWord:string,enteredWord:string,char:any):string{
+  compareWordsHandler(guestedWord: string, enteredWord: string, char: any,boxIndex:number): string {
+    console.log(guestedWord)
+    console.log(enteredWord)
+    console.log(char)
     for (let i = 0; i < guestedWord.length; i++) {
       for (let j = 0; j < enteredWord.length; j++) {
-          if (guestedWord[i] == enteredWord[j] && guestedWord[i] == char) {
-            if (i==j)
-              return 'btn btn-success char';
-            else
-              return 'btn btn-warning char';
+        if (guestedWord[i] == enteredWord[j] && guestedWord[i] == char) {
+          if (i == boxIndex){
+            return 'btn btn-success char';
           }
+          else
+            return 'btn btn-warning char';
         }
       }
-      return 'btn btn-secondary char';
     }
+    return 'btn btn-secondary char';
+  }
 
 
 }
